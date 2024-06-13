@@ -51,15 +51,14 @@ values
 --    Записать данные в новое поле new_salary. Поле создавать не нужно, используем AS. 
 
 select * , case 
-				when department like 'Sales' then salary + salary * 0.20
-				when department like 'Finance' then salary + salary * 0.15
-				when department like 'Shipping' then salary + salary * 0.10
-				when department like 'Marketing' then salary + salary * 0.25
-				when department like 'Human Resources' then salary + salary * 0.20
-				when department like 'IT' then salary = salary + salary * 0.35
-			end as new_salary
+	        when department like 'Sales' then salary + salary * 0.20
+		when department like 'Finance' then salary + salary * 0.15
+		when department like 'Shipping' then salary + salary * 0.10
+		when department like 'Marketing' then salary + salary * 0.25
+		when department like 'Human Resources' then salary + salary * 0.20
+		when department like 'IT' then salary = salary + salary * 0.35
+	   end as new_salary
 from employees;
-
 
 -- 2. Создать поле new_salary типа numeric(7, 2).
 alter table employees
@@ -70,13 +69,13 @@ set sql_safe_updates=0;
 
 update employees 
 set new_salary = case 
-					when department like 'Sales' then salary * 1.20
-					when department like 'Finance' then salary * 1.15
-					when department like 'Shipping' then salary * 1.10
-					when department like 'Marketing' then salary * 1.25
-					when department like 'Human Resources' then salary * 1.20
-					when department like 'IT' then salary = salary * 1.35
-				 end;  
+			when department like 'Sales' then salary * 1.20
+			when department like 'Finance' then salary * 1.15
+			when department like 'Shipping' then salary * 1.10
+			when department like 'Marketing' then salary * 1.25
+			when department like 'Human Resources' then salary * 1.20
+			when department like 'IT' then salary = salary * 1.35
+		end;  
                  
 -- 4. Вывести из таблицы employees firstname как name, lastname как surname и salary как total_salary.
 select first_name as name, last_name as surname, salary as total_salary
@@ -85,11 +84,11 @@ from employees;
 -- 5. Вывести новое поле commission (через AS), которое будет null, если зарплата сотрудника меньше 3000,
 --    будет 10, если зарплата меньше 6000, будет 15, если зарплата меньше 9000, и будет 20, если зарплата больше/равно 9000.
 select *, case 
-			when salary < 3000 then null
-			when salary < 6000 then 10
-			when salary < 9000 then 15
-			else 20
-		  end as comission
+		when salary < 3000 then null
+		when salary < 6000 then 10
+		when salary < 9000 then 15
+		else 20
+	  end as comission
 from employees;
 
 -- 6. Создать новое поле commission и соответственно заполнить.
@@ -98,11 +97,11 @@ add comission int;
 
 update employees 
 set comission = case 
-					when salary < 3000 then null
-					when salary < 6000 then 10
-					when salary < 9000 then 15
-					else 20
-				end;
+		  when salary < 3000 then null
+		  when salary < 6000 then 10
+		  when salary < 9000 then 15
+		  else 20
+	        end;
                 
 -- 7. Создать поле finalsalary и заполнить формулой salary + salary * commission / 100. 
 --    Проверить commission на null, так чтобы в случае неопределенности finalprice принимал значение salary.                 
@@ -111,9 +110,9 @@ add final_salary numeric(7,2);
 
 update employees
 set final_salary = case
-						when comission is null then salary 
+			when comission is null then salary 
                         else salary + salary * comission / 100
-				   end;
-
+		   end;
+-- 8. Удалить из таблицы сотрудников, у которых commission меньше 15.
 delete from employees 
 where comission < 15 or comission is null;
