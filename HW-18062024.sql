@@ -26,10 +26,10 @@ add chk_email varchar(128);
 
 update employees
 set chk_email = case
-					when length(email) < 25 then 'Введите больше символов'
+		    when length(email) < 25 then 'Введите больше символов'
                     when length(email) between 25 and 30 then 'Кол/во символов совпадает'
                     else 'Введите меньше символов'
-				end;
+		end;
 
 -- 5. Из таблицы countries получить список стран с указанием количества символов в их названиях.
 
@@ -50,3 +50,4 @@ from employees;
 
 select concat(first_name, " ", last_name) as full_name, right(phone_number, 4) as last_4_digits_of_phone
 from employees;
+
