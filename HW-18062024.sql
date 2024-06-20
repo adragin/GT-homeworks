@@ -51,3 +51,7 @@ from employees;
 select concat(first_name, " ", last_name) as full_name, right(phone_number, 4) as last_4_digits_of_phone
 from employees;
 
+
+
+
+-- End of file!  :)
