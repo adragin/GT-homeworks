@@ -35,10 +35,7 @@ from sellers as s
 join orders as o
 on s.SELL_ID = o.SELL_ID
 where o.AMT = (select max(o.amt)
-				from sellers as s
-				join orders as o
-				on s.SELL_ID = o.SELL_ID
-				where month(o.odate) in (3,4));
-
-;
-
+		from sellers as s
+		join orders as o
+		on s.SELL_ID = o.SELL_ID
+		where month(o.odate) in (3,4) );
