@@ -7,7 +7,7 @@ where month(odate) = 6;
 select *
 from orders
 where ( (month(odate) = 4 AND day(odate) >= 10)
-		OR (month(odate) = 5 AND day(odate) <= 10) 
+	OR (month(odate) = 5 AND day(odate) <= 10) 
 );
 
 -- 3. Определить сколько покупок было совершено в марте
